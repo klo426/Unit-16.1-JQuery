@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies app</title>
+    <script srrc="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+    <div class="condainer">
+    <h1>Movies App</h1>
+    <form id="movieForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" min="1" max="10" required>
+        <button type="submit">Add Movie</button>
+    </form>
+    <div id="movieList">
+
+    </div>
+
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#movieForm").submit(function (e) {
+                e.preventDefault();
+                const title = $("#title").val();
+                const rating = $("#rating").val();
+
+                if (title && rating) {
+                    const movieEntry = $("<div>").addClass("movie-entry");
+                    const movieTitle = $("<h3>").text("title:" + title);
+                    const movieRating = $("<p>").text("Rating:" + rating);
+                    const removeButton = $("<button>").text("Remove");
+                        removeButton.click(function () {
+                            movieEntry.remove();
+                        });
+
+                        movieEntry.append(movieTitle, movieRating, removeButton);
+                        $("#movieList").append(movieEntry);
+
+                        $("#title").val("");
+                        $("rating").val("");
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
